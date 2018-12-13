@@ -15,7 +15,7 @@ if (!empty($_GET['del'])) {
 // EDIT EVENT
 if (!empty($_POST['editId'])) {
     if ($adminRole) {
-      // confirms_needed
+      // REQUIRE CONFIRMATION
         $stmts = $conn->prepare("UPDATE `events` SET `title` = ?,`desc` = ?,`confirms_needed` = ?,`start` = ?,`end` = ?,`startColor` = ?,`endColor` = ?,`user_id` = ?  WHERE `events`.`id` = ?");
         $res = $stmts->execute(array($_POST['editTitle'], $_POST['editDesc'],$_POST['editConfirms'], $_POST['editStart'], $_POST['editEnd'], $_POST['editStartColor'], $_POST['editEndColor'], $_SESSION['user']['id'], $_POST['editId']));
         $stmts->closeCursor();
@@ -62,7 +62,7 @@ if (!empty($_POST['newTitle'])) {
                     <a href="availability.php?mod=-1" class="btn btn-primary" >New availability</a>
                     <?php
                 }
-                // Show single event
+                // SHOW SINGLE EVENT
                 if ((empty($_GET['mod'])) && (!empty($_GET['show']))) {
                     $stmts = $conn->prepare("SELECT * from events WHERE id=? LIMIT 1");
                     $res = $stmts->execute(array($_GET['show']));
@@ -131,7 +131,7 @@ if (!empty($_POST['newTitle'])) {
                         echo "<h4>Availability Not found</h4>";
                     }
                 }
-             // Show list
+             // SHOW LIST
             if((empty($_GET['mod']))&&(empty($_GET['show']))) {
                 $q = $conn->query("SELECT * from events");
              ?>
@@ -153,7 +153,7 @@ if (!empty($_POST['newTitle'])) {
                       $countedConfirms++;
                     if($event['confirms_needed']>$countedConfirms) {
                       $isConfirmed="<span class='bg-danger'>".$countedConfirms."/".$event['confirms_needed']." confirms</span>";
-                      //$confirmed = true;
+                      //$CONFIRMATION = TRUE
                     } else if (($reservation['status']=="confirmed")&&($event['confirms_needed']<=$countedConfirms)) {
                       $isConfirmed="<span class='bg-success'>".$countedConfirms."/".$event['confirms_needed']." confirms (complete)</span>";
                       $confirmed = true;
@@ -172,7 +172,6 @@ if (!empty($_POST['newTitle'])) {
                   $f = true;
                   $fHtml .= '<a href="reservations.php?action=new&event_id='.$event['id'].'" class="btn btn-info">Make reservation</a>';
               } else {
-                //echo '<a class="btn btn-warning disabled">Reservation not possible</a>';
               }
                 $fHtml .= "<a href='availability.php?show=".$event['id']."' class='btn btn-success'>Show</a>";
               if($adminRole){
@@ -188,16 +187,16 @@ if (!empty($_POST['newTitle'])) {
                     <?php
                 }
 
-// Modify and create
+// MODIFY AND CREATE
                 if ((!empty($_GET['mod'])) && (empty($_GET['show']))) {
 
                     if ($adminRole) {
 
-//create event
+//CREATE EVENT
                         if ($_GET['mod'] == "-1") {
                             ?>
                             <script>
-                              var dateFormat = 'Y-m-d H:m:s'; //this should be mysql-compatible
+                              var dateFormat = 'Y-m-d H:m:s'; //mysql-compatible check
                                 $(document).ready(function () {
 
                                     $("#newStartColor").spectrum({
@@ -256,7 +255,7 @@ if (!empty($_POST['newTitle'])) {
                             <?php
                         } else {
 
-                            // Edit event
+                            // EDIT EVENT
                             $stmts = $conn->prepare("SELECT * from events WHERE id=? LIMIT 1");
                             $res = $stmts->execute(array($_GET['mod']));
                             $event = $stmts->fetch(PDO::FETCH_ASSOC);
@@ -326,7 +325,7 @@ if (!empty($_POST['newTitle'])) {
 
                         echo "<h4>403 - You are not permitted to perform this action</h4>";
                     }
-                } // end of create and edit events
+                } // END OF CREATE AND EDIT EVENTS
                 ?>
             </div>
         </main>

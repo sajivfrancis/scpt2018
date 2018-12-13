@@ -52,7 +52,6 @@ if (!empty($_SESSION['user'])) {
             <div class="content-wrapper content-wrapper--with-bg">
               <h1> All Users</h1>
              <?php
-             // $stmts = $conn->prepare("SELECT * from users WHERE role NOT IN ('students')");
              $stmts = $conn->prepare("SELECT * from users");
              $stmts->execute();
              $users = $stmts->fetchAll(PDO::FETCH_ASSOC);
@@ -70,7 +69,6 @@ if (!empty($_SESSION['user'])) {
              ?>
 			 <h1> Students </h1>
              <?php
-             // $stmts = $conn->prepare("SELECT * from users WHERE role NOT IN ('students')");
              $stmts = $conn->prepare("SELECT * from users WHERE role NOT IN ('sonadmin','hospadmin','superadmin')");
              $stmts->execute();
              $users = $stmts->fetchAll(PDO::FETCH_ASSOC);
@@ -88,7 +86,6 @@ if (!empty($_SESSION['user'])) {
              ?>
 			<h1> Admins </h1>
              <?php
-             // $stmts = $conn->prepare("SELECT * from users WHERE role NOT IN ('students')");
              $stmts = $conn->prepare("SELECT * from users WHERE role NOT IN ('students')");
              $stmts->execute();
              $users = $stmts->fetchAll(PDO::FETCH_ASSOC);

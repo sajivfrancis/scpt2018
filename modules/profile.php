@@ -6,8 +6,6 @@ if (empty($_GET['userid'])) {
 }
 // Application library ( with Lib class )
 //require __DIR__ . '/resource/library.php';
-//$app = new DemoLib();
-//$user = $app->UserDetails($_SESSION['user_id']); // get user details
 ?>
 require_once 'mhead.php';
 ?>
@@ -51,7 +49,7 @@ require_once 'mhead.php';
                                 <div class="panel-body">
                                     <div class="col-md-4 col-xs-12 col-sm-6 col-lg-4">
                                        <?php
-                                       // Profile picture is a flat file.. need to work on permanent solution.
+                                       // Profile picture function needs to be built!
                                        $profilePic = "https://x1.xingassets.com/assets/frontend_minified/img/users/nobody_m.original.jpg";
                                        if(file_exists(dirname(__FILE__)."/../img/avatars/".$user['id'].".png")){
                                          $profilePic = "../img/avatars/".$user['id'].".png";

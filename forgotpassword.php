@@ -1,19 +1,19 @@
 <?php
 require_once "head.php";
-// if session is set direct to index
+// if session is set redirect to index
 if (isset($_SESSION['user'])) {
     if (($_SESSION['user']['role'] == "students") || ($_SESSION['user']['role'] == "superadmin")) {
         header("Location: modules/dashboard.php");
     } else if ($_SESSION['user']['role'] == "admin") {
         header("Location: modules/settings.php");
     } else {
-        // if not students or admins
+        // if user is not a student or admin
         header("Location: modules/profile.php");
     }
     exit;
 } else {
 
-    // STEPS TO DO AFTER THE "forgot password" OPTION IS SELECTED BY USER
+    // STEPS TO AFTER THE "forgot password" OPTION IS SELECTED BY USER
     if ((!empty($_GET['forgot'])) && (!empty($_GET['email']))) {
 
         $stmt = $conn->prepare("SELECT * FROM users WHERE email= ?");
@@ -26,13 +26,8 @@ if (isset($_SESSION['user'])) {
         if (!empty($result)) {
             $resetMd5 = md5(random_bytes(99));
             $stmts = $conn->prepare("UPDATE `users` SET `resetmd5` = ? WHERE `users`.`email` = ?");
-            //$stmts->bind_param("sss", $uname, $email, $password);
             $res = $stmts->execute(array($resetMd5, $_GET['email'])); //get result
             $stmts->closeCursor();
-
-            // Remove for production!
-            //echo "<a href='" . $webRoot . "login.php?resetmd5=" . $resetMd5 . "&email=" . $_GET['email'] . "'>Click here</a>";
-
             mail($_GET['email'], "Reset your password", "<h1>Want to reset the password?</h1><p><a href='" . $webRoot . "login.php?resetmd5=" . $resetMd5 . "&email=" . $_GET['email'] . "'>Click here</a></p>");
         } else {
             echo "<h1>NO SUCH USER!</h1>";
@@ -52,9 +47,6 @@ if ((!empty($_GET['resetmd5'])) && (!empty($_GET['email']))) {
 
     if ($result['resetmd5'] == $_GET['resetmd5']) {
 
-//put the form here!
-        //use include/require_once, put with echo, whatever... 
-        //a form like here
         //todo: redirect or show password-change-stuff
         echo "<h1>Reset password ALLOWED ;)</h1>";
         exit;
@@ -74,7 +66,7 @@ if ((!empty($_POST['email'])) && (!empty($_POST['pass']))) {
     $result = $stmt->fetch(PDO::FETCH_ASSOC);
     $stmt->closeCursor();
     if (password_verify($_POST['pass'], $result['password'])) {
-        $_SESSION['user'] = $result; // save all data from user in the session
+        $_SESSION['user'] = $result;
         if ($_SESSION['user']['role'] == "students") {
             header("Location: modules/dashboard.php");
         } else if ($_SESSION['user']['role'] == "superadmin") {
@@ -84,9 +76,7 @@ if ((!empty($_POST['email'])) && (!empty($_POST['pass']))) {
             // if admin
             header("Location: user.php");
         }
-    } /* elseif ($count == 1) {
-      $errMSG = "Bad password";
-      } */
+    }
     else
         $errMSG = "Wrong credits";
 }

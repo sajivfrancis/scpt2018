@@ -28,13 +28,11 @@ if (($_SESSION['user']['role'] == "sonadmin") || ($_SESSION['user']['role'] == "
 <main class="l-main">
         <?php include "include/nav.php"; ?>
 <?php
-//$conn=new PDO('mysql:host=localhost; dbname=scpt', 'sfrancis', 'Fairfield123') or die(mysql_error());
 if((isset($_FILES['photo']))&&($adminRole)) {
   $name=$_FILES['photo']['name'];
   $size=$_FILES['photo']['size'];
   $type=$_FILES['photo']['type'];
   $temp=$_FILES['photo']['tmp_name'];
-  //$caption1=$_POST['caption'];
   $link=$_POST['link'];
   echo __DIR__."upload/".$name;
   if(!move_uploaded_file($temp, __DIR__."/upload/".$name)){

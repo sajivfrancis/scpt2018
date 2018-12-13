@@ -111,9 +111,6 @@ require_once 'mhead.php';
                   if ($reservation['status'] == "confirmed"){
                     $confirmCount++;
                     if ($event['confirms_needed']>$confirmCount) {
-                        //  $titleContent .= " (reserved)";
-                        // endColor should maybe renamed to confirmedColor
-                      //  echo 'color:\'' . $event['endColor'] . '\',';
                         $halfConfirmed = true;
                     } else if ($event['confirms_needed']<=$confirmCount) {
                       $resConfirmed = true;
@@ -146,58 +143,6 @@ require_once 'mhead.php';
             echo "},";
         }
         ?>];
-
-                /*[
-
-                 url: 'https://ccp.cloudaccess.net/aff.php?aff=5188',
-                 {
-                 title: 'All Day Event',
-                 start: new Date(y, m, 1)
-                 },
-                 {
-                 id: 999,
-                 title: 'Repeating Event',
-                 start: new Date(y, m, d-3, 16, 0),
-                 allDay: false,
-                 className: 'info'
-                 },
-                 {
-                 id: 999,
-                 title: 'Repeating Event',
-                 start: new Date(y, m, d+4, 16, 0),
-                 allDay: false,
-                 className: 'info'
-                 },
-                 {
-                 title: 'Meeting',
-                 start: new Date(y, m, d, 10, 30),
-                 allDay: false,
-                 className: 'important'
-                 },
-                 {
-                 title: 'Lunch',
-                 start: new Date(y, m, d, 12, 0),
-                 end: new Date(y, m, d, 14, 0),
-                 allDay: false,
-                 className: 'important',
-                 color: 'yellow',
-                 textColor: 'black'
-                 },
-                 {
-                 title: 'Birthday Party',
-                 start: new Date(y, m, d+1, 19, 0),
-                 end: new Date(y, m, d+1, 22, 30),
-                 allDay: false,
-                 className: 'danger'
-                 },
-                 {
-                 title: 'Click for Google',
-                 start: new Date(y, m, 28),
-                 end: new Date(y, m, 29),
-                 url: 'https://ccp.cloudaccess.net/aff.php?aff=5188',
-                 className: 'success'
-                 }
-                 ];*/
                 jQuery(document).ready(function ($) {
                     $('#calendar').fullCalendar({
                         header: {
@@ -208,11 +153,9 @@ require_once 'mhead.php';
                         defaultDate: date,
                         timezone: "Asia/Ho_Chi_Minh",
                         defaultView: 'month',
-                        //editable: true,
                         selectable: true,
                         events: calData,
                         eventRender: function (event, element) {
-                            //element.append('<span data-id="'+ event.id+'" class="deleteEvent" onclick="alert("asds");">x</span>');
                         },
                         eventResize: function (event, delta, revertFunc) {
 

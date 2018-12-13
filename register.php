@@ -11,7 +11,7 @@ if (isset($_POST['signup'])) {
 
     $firstname = trim($_POST['firstname']);
     $lastname = trim($_POST['lastname']);
-    $uname = trim($_POST['uname']); // get posted data and remove whitespace
+    $uname = trim($_POST['uname']);
     $email = trim($_POST['email']);
 
 
@@ -19,25 +19,15 @@ if (isset($_POST['signup'])) {
     $stmt = $conn->prepare("SELECT * FROM users WHERE email= ?");
     /* execute query */
     $stmt->execute(array($email));
-
     $result = $stmt->fetch(PDO::FETCH_ASSOC);
     $stmt->closeCursor();
-    //var_dump($result);
     if (empty($result)) {
         $resetMd5 = md5(random_bytes(99));
         $password = password_hash($_POST['password'], PASSWORD_BCRYPT, ['cost' => 12,]);
-        // $stmts = $conn->prepare("UPDATE `users` SET `resetmd5` = ? WHERE `users`.`email` = ?");
         $stmts = $conn->prepare("INSERT INTO users(firstname,lastname,username,email,resetmd5,password) VALUES(?, ?, ?, ?, ?, ?)");
-        //$stmts->bind_param("sss", $uname, $email, $password);
         $res = $stmts->execute(array($firstname, $lastname, $uname, $email, $resetMd5, $password));
         $stmts->closeCursor();
-
-
-        // Remove for production!
-        //echo "<a href='" . $webRoot . "login.php?setmd5check=" . $resetMd5 . "&setemail=" . $email . "&setregister=1'>DEBUG-LINK WHICH IS IN EMAIL TOO</a>";
-
-        // https://www.w3schools.com/php/func_mail_mail.asp
-        $whatsDone = "You should have a email. Don't forget to check the spam-folder!";
+        $whatsDone = "You should have an email. Please don't forget to check the spam-folder!";
        mail($email, "Please confirm your email", "Hello ".$firstname." ". $lastname." \r\n Welcome to SCPT \r\n Please visit this link to confirm and complete your registration: ". $webRoot . "login.php?setmd5check=" . $resetMd5 . "&setemail=" . $email . "&setregister=1 \r\n Thanks, the SCPT-Team");
       } else {
         $whatsDone = "USER ALREADY EXISTS!";

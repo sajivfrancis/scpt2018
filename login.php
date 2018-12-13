@@ -1,7 +1,7 @@
 <?php
 require_once "head.php";
 $whatsDone = "";
-// if session is set direct the user to the index page.
+// if session is set redirect the user to the index page.
 if (isset($_SESSION['user'])) {
     if (empty($_SESSION['user']['resetmd5'])) {
         header("Location: modules/dashboard.php");
@@ -14,7 +14,6 @@ if (isset($_SESSION['user'])) {
     if ((!empty($_GET['forgot'])) && (!empty($_GET['email']))) {
 
         $stmt = $conn->prepare("SELECT * FROM users WHERE email= ?");
-        /* execute query */
         $stmt->execute(array($_GET['email']));
 
         $result = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -23,19 +22,11 @@ if (isset($_SESSION['user'])) {
         if (!empty($result)) {
             $resetMd5 = md5(random_bytes(99));
             $stmts = $conn->prepare("UPDATE `users` SET `resetmd5` = ? WHERE `users`.`email` = ?");
-            //$stmts->bind_param("sss", $uname, $email, $password);
-            $res = $stmts->execute(array($resetMd5, $_GET['email'])); //get result
+            $res = $stmts->execute(array($resetMd5, $_GET['email'])); 
             $stmts->closeCursor();
-
-            // Remove the link or hash out for production!
-            //echo "<a href='" . $webRoot . "login.php?resetmd5=" . $resetMd5 . "&email=" . $_GET['email'] . "'>DEBUG-LINK</a>";
-            // Set content-type for sending emails through HTML
             $headers = "MIME-Version: 1.0" . "\r\n";
             $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
-            // More headers
             $headers .= 'From: <connectsfrancis@gmail.com>' . '\r\n';
-            //$headers .= 'Cc: connectsfrancis@gmail.com' . '\r\n'; // CC not needed here
-            // https://www.w3schools.com/php/func_mail_mail.asp
             $whatsDone = "PLEASE CHECK YOUR MAIL TO RESET YOUR PASSWORD";
       mail($_GET['email'], "Reset your password", "Hello ".$result['firstname']." ".$result['lastname']." \r\nYou have requested a password-reset on SCPT's Web Portal. Please enter your new password by clicking on the following link: " . $webRoot . "login.php?resetmd5=" . $resetMd5 . "&email=" . $_GET['email']."\r\n Best Regards, the SCPT-Team");
         } else {
@@ -87,7 +78,6 @@ if ((!empty($_POST['setmd5check'])) && (!empty($_POST['setmail'])) && (!empty($_
     }
 }
 // EMAIL-RESET END
-// check the email-link and allow for password reset
 // EMAIL-RESET FORM
 if ((!empty($_GET['resetmd5'])) && (!empty($_GET['email']))) {
     $stmt = $conn->prepare("SELECT * FROM users WHERE email= ?");
@@ -178,7 +168,7 @@ if ((!empty($_GET['resetmd5'])) && (!empty($_GET['email']))) {
                 </div>
             </body></html>
         <?php
-        //todo: redirect or show password-change-stuff
+        //todo: REDIRECT FOR PASSWORD CHANGE
 
         exit;
     } else {
@@ -187,9 +177,6 @@ if ((!empty($_GET['resetmd5'])) && (!empty($_GET['email']))) {
     }
 }
 // EMAIL-RESET FORM END
-// no need for send that data, simply check the existing one
-//if (isset($_POST['btn-login'])) {
-// LOGIN
 if ((!empty($_POST['email'])) && (!empty($_POST['pass']))) {
     $email = $_POST['email'];
     $upass = $_POST['pass'];
@@ -201,11 +188,9 @@ if ((!empty($_POST['email'])) && (!empty($_POST['pass']))) {
     $stmt->closeCursor();
     if (empty($result['resetmd5'])) {
         if (password_verify($_POST['pass'], $result['password'])) {
-            $_SESSION['user'] = $result; // save all data from user in the session
+            $_SESSION['user'] = $result;
             header("Location: modules/dashboard.php");
-        } /* elseif ($count == 1) {
-          $errMSG = "Bad password";
-          } */
+        }
         else
             $errMSG = "Wrong credits";
     } else {

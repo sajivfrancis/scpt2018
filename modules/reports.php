@@ -27,7 +27,7 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-mousewheel/3.1.13/jquery.mousewheel.min.js"></script>
         <script src="../assets/js/jquery.datetimepicker.js"></script>
         <script>
-            var dateFormat = 'Y-m-d H:m:s'; //this should be mysql-compatible
+            var dateFormat = 'Y-m-d H:m:s'; //mysql-compatibility check
             $(document).ready(function () {
 
                 jQuery('#inputStart').datetimepicker({
@@ -79,7 +79,7 @@
                 </form>
                 <?php
                 $reservationHtml = "<table class='table'><thead><td>Title</td><td>Desc</td><td>Status</td><td>User-Id</td><td>Availability</td><td>Son-Confirm</td><td>Hosp-Confirm</td><td>Created at</td></thead><tbody>";
-                // create the sql-command for the various filter-situations.
+                // create the sql-commands for various filters
                 if((!empty($_GET['inputReservationStart']))&&(!empty($_GET['inputReservationEnd']))){
                   $stmts = $conn->prepare("SELECT * from reservations WHERE created_at > ? AND created_at < ?  ORDER BY created_at DESC");
                   $stmts->execute(array($_GET['inputReservationStart'],$_GET['inputReservationEnd']));
@@ -96,8 +96,6 @@
                   $stmts = $conn->prepare("SELECT * from reservations ORDER BY created_at DESC");
                   $stmts->execute();
                 }
-              //  $stmts = $conn->prepare("SELECT * from reservations ORDER BY created_at DESC");
-              //  $stmts->execute();
                 $reservations = $stmts->fetchAll(PDO::FETCH_ASSOC);
                 $stmts->closeCursor();
                 if ($reservations != false) {
@@ -194,7 +192,6 @@
                 <h1>Admins</h1>
                <?php
                $stmts = $conn->prepare("SELECT * from users WHERE role NOT IN ('students')");
-               //$stmts = $conn->prepare("SELECT * from users");
                $stmts->execute();
                $users = $stmts->fetchAll(PDO::FETCH_ASSOC);
                $stmts->closeCursor();
