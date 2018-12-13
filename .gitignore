@@ -1,0 +1,3 @@
+#ignore all passwords for db:
+dbconnect.php
+/modules/mhead.php
