@@ -1,0 +1,7 @@
+#common settings that generally should always be used with your language specific settings
+
+#
+# The above will handle all files NOT found below
+#Static
+* linguist-vendored
+*.php linguist-vendored=false
