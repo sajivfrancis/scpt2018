@@ -1,3 +1,15 @@
-#ignore all passwords for db:
+#1.1 Do NOT ignore file pattern in  any subdirectory
+!*/dbconnect.php
+#1.2 ...only ignore it in the current directory
+/dbconnect.php
+/modules/mhead.php
+
+##########################
+
+# 2.1 Ignore file pattern everywhere
+dbconnect.php
+/modules/mhead.php
+# 2.2 ...but NOT in the current directory
+!/dbconnect.php#ignore all passwords for db:
 /dbconnect.php
 modules/mhead.php
