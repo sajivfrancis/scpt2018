@@ -1,9 +1,8 @@
-<meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
-# SCPT
+## SCPT
 Student Clinical Placement Tool
 
 ## Landing page Poster & Video
-
+<meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
 Click on image below to play video on youtube:
 
 [![scpt](https://github.com/sajivfrancis/scpt2018/blob/master/img/image.png?raw=true)](https://youtu.be/W5umG4a3R4Y)
