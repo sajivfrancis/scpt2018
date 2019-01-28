@@ -1,7 +1,9 @@
 # SCPT
 Student Clinical Placement Tool
 
-## Landing page screenshot
+## Landing page Poster & Video
+
+<video src="./img/scptgithub.mp4" poster="![snip20180419_3](https://user-images.githubusercontent.com/33673071/39100786-6696a8cc-465d-11e8-9344-1a2bc84bfb79.png)" width="320" height="200" controls preload></video>
 
 ![snip20180419_3](https://user-images.githubusercontent.com/33673071/39100786-6696a8cc-465d-11e8-9344-1a2bc84bfb79.png)
 
