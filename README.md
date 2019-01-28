@@ -5,8 +5,6 @@ Student Clinical Placement Tool
 ## Landing page Poster & Video
 [![scpt](https://user-images.githubusercontent.com/33673071/39100786-6696a8cc-465d-11e8-9344-1a2bc84bfb79.png)](https://youtu.be/W5umG4a3R4Y)
 
-![snip20180419_3](https://user-images.githubusercontent.com/33673071/39100786-6696a8cc-465d-11e8-9344-1a2bc84bfb79.png)
-
 
 About page: Clinical Placement Tool Connecting Students with Hospital's Placement Schedule
 
