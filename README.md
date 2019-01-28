@@ -6,7 +6,7 @@ Student Clinical Placement Tool
 
 Click on image below to play video on youtube:
 
-[![scpt](scpt2018/img/image.png)](https://youtu.be/W5umG4a3R4Y)
+[![scpt](https://github.com/sajivfrancis/scpt2018/blob/master/img/image.png?raw=true)](https://youtu.be/W5umG4a3R4Y)
 
 
 About page: Clinical Placement Tool Connecting Students with Hospital's Placement Schedule
@@ -17,7 +17,7 @@ Contact page: For more information about this projects, contact us.
 scptgithub.mp4
 Web server running on Apache
 PHP 7.0
-MySql
+MySqlscpt2018
 
 ### Software Components
 
