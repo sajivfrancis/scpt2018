@@ -5,9 +5,9 @@ Student Clinical Placement Tool
 ## Landing page Poster & Video
 
 <video poster="https://user-images.githubusercontent.com/33673071/39100786-6696a8cc-465d-11e8-9344-1a2bc84bfb79.png" width="618" height="347" controls preload> 
-    <source src="https://github.com/sajivfrancis/scpt2018/blob/master/img/scptgithub.mp4?raw=true" media="only screen and (min-device-width: 568px)"></source> 
-    <source src="https://github.com/sajivfrancis/scpt2018/blob/master/img/scptgithub.mp4?raw=true" media="only screen and (max-device-width: 568px)"></source> 
-    <source src="https://github.com/sajivfrancis/scpt2018/blob/master/img/scptgithub.mp4?raw=true"></source> 
+    <source src="https://youtu.be/W5umG4a3R4Y" media="only screen and (min-device-width: 568px)"></source> 
+    <source src="https://youtu.be/W5umG4a3R4Y" media="only screen and (max-device-width: 568px)"></source> 
+    <source src="https://youtu.be/W5umG4a3R4Y"></source> 
 </video>
 
 <video src="" width="320" height="200" controls preload></video>
